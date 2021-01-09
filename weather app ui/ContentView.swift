@@ -13,8 +13,7 @@ struct ContentView: View {
     var body: some View {
         
         ZStack {
-            BackgroundView(topColour: isNight ? .black : .blue,
-                           bottomColour: isNight ? .gray : Color("LightBlueGradient"))
+            BackgroundView(isNight: $isNight)
             
             VStack {
                 CityTextView(CityName: "AUCKLAND, NZ")
@@ -82,11 +81,11 @@ struct WeatherDayView: View {
 }
 
 struct BackgroundView: View {
-    var topColour: Color
-    var bottomColour: Color
+    @Binding var isNight: Bool
     
     var body: some View {
-        LinearGradient(gradient: Gradient(colors: [topColour, bottomColour]),
+        LinearGradient(gradient: Gradient(colors: [isNight ? .black : .blue,
+                                                   isNight ? .gray : Color("LightBlueGradient")]),
                        startPoint: .topLeading,
                        endPoint: .bottomTrailing)
             .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
